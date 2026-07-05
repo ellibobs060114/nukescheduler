@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuke Scheduler</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .box {
+      background: #222;
+      padding: 30px;
+      border-radius: 12px;
+      width: 350px;
+      text-align: center;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+    }
+
+    button {
+      background: #e63946;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #c62828;
+    }
+
+    #dateSection {
+      display: none;
+    }
+
+    #result {
+      margin-top: 20px;
+      color: #7CFC00;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Who would you like to "nuke"?</h2>
+
+  <input
+    type="text"
+    id="target"
+    placeholder="Type anything..."
+  >
+
+  <div id="dateSection">
+    <input type="date" id="date">
+    <button onclick="finish()">Schedule</button>
+  </div>
+
+  <div id="result"></div>
+</div>
+
+<script>
+const target = document.getElementById("target");
+const dateSection = document.getElementById("dateSection");
+
+target.addEventListener("input", () => {
+  dateSection.style.display = target.value.trim() ? "block" : "none";
+});
+
+function finish() {
+  const name = target.value.trim();
+  const date = document.getElementById("date").value;
+
+  if (!date) {
+    alert("Please choose a date.");
+    return;
+  }
+
+  document.getElementById("result").innerHTML =
+    `✅Nuke scheduled!<br><br>
+     Target: <b>${name}</b><br>
+     Date: <b>${date}</b><br><br>
+     This cannot be cancelled.`;
+}
+</script>
+
+</body>
+</html>
