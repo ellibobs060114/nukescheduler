@@ -38,10 +38,12 @@
     background: #e63946;
     color: white;
     cursor: pointer;
+    opacity: 1;
   }
 
-  button:hover {
-    background: #c62828;
+  button:disabled {
+    background: #555;
+    cursor: not-allowed;
   }
 
   #dateSection {
@@ -82,7 +84,7 @@
       <option>HUGE</option>
     </select>
 
-    <button onclick="finish()">Schedule</button>
+    <button id="scheduleBtn" onclick="finish()" disabled>Schedule</button>
   </div>
 
   <div id="countdown"></div>
@@ -92,28 +94,35 @@
 <script>
 const target = document.getElementById("target");
 const dateSection = document.getElementById("dateSection");
+const dateInput = document.getElementById("date");
+const sizeInput = document.getElementById("size");
+const scheduleBtn = document.getElementById("scheduleBtn");
 
 target.addEventListener("input", () => {
   dateSection.style.display = target.value.trim() ? "block" : "none";
+  checkForm();
 });
+
+dateInput.addEventListener("input", checkForm);
+sizeInput.addEventListener("change", checkForm);
+
+function checkForm() {
+  const nameFilled = target.value.trim() !== "";
+  const dateFilled = dateInput.value !== "";
+  const sizeFilled = sizeInput.value !== "";
+
+  scheduleBtn.disabled = !(nameFilled && dateFilled && sizeFilled);
+}
 
 function finish() {
   const name = target.value.trim();
-  const date = document.getElementById("date").value;
-  const size = document.getElementById("size").value;
-
-  if (!date) {
-    alert("Please choose a date.");
-    return;
-  }
-
-  if (!size) {
-    alert("Please choose a size.");
-    return;
-  }
+  const date = dateInput.value;
+  const size = sizeInput.value;
 
   const countdownEl = document.getElementById("countdown");
   const resultEl = document.getElementById("result");
+
+  scheduleBtn.disabled = true;
 
   let count = 3;
   countdownEl.textContent = count;
@@ -130,11 +139,10 @@ function finish() {
 
       resultEl.innerHTML =
         `✅ SUCCESS!<br><br>
-         Target: <b>${name}</b><br>
-         Date: <b>${date}</b><br>
-         Size: <b>${size}</b><br><br>
-         Operation complete.`;
-
+        Target: <b>${name}</b><br>
+        Date: <b>${date}</b><br>
+        Size: <b>${size}</b><br><br>
+        Operation complete.`;
     }
   }, 1000);
 }
