@@ -56,70 +56,12 @@
 <body>
 
 <div class="box">
- <h2>Select a country</h2>
+  <h2>Who would you like to "nuke"?</h2>
 
-<input type="text" id="countrySearch" placeholder="Search country...">
-
-<select id="countrySelect" size="8"></select>
-  <script>
-const countries = [
-  "England","Scotland","Wales","Northern Ireland",
-  "United States",
-  "Afghanistan","Albania","Algeria","Andorra","Angola","Argentina","Armenia",
-  "Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados",
-  "Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina",
-  "Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cabo Verde",
-  "Cambodia","Cameroon","Canada","Central African Republic","Chad","Chile","China",
-  "Colombia","Comoros","Congo","Costa Rica","Croatia","Cuba","Cyprus","Czech Republic",
-  "Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador",
-  "Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","Fiji","Finland",
-  "France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala",
-  "Guinea","Guinea-Bissau","Guyana","Haiti","Honduras","Hungary","Iceland","India",
-  "Indonesia","Iran","Iraq","Ireland","Israel","Italy","Ivory Coast","Japan",
-  "Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyzstan","Laos","Latvia",
-  "Lebanon","Liberia","Libya","Lithuania","Luxembourg",
-  "Madagascar","Malaysia","Maldives","Mali","Malta","Mexico","Moldova","Monaco",
-  "Mongolia","Montenegro","Morocco","Mozambique","Nepal","Netherlands","New Zealand",
-  "Nigeria","North Korea","North Macedonia","Norway","Pakistan","Panama","Paraguay",
-  "Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Saudi Arabia",
-  "Senegal","Serbia","Singapore","Slovakia","Slovenia","Somalia","South Africa",
-  "South Korea","Spain","Sri Lanka","Sudan","Sweden","Switzerland","Syria",
-  "Thailand","Tunisia","Turkey","Ukraine","United Arab Emirates","Uruguay","Uzbekistan",
-  "Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"
-];
-
-const search = document.getElementById("countrySearch");
-const select = document.getElementById("countrySelect");
-
-// populate dropdown
-function render(list) {
-  select.innerHTML = "";
-  list.forEach(c => {
-    const opt = document.createElement("option");
-    opt.value = c;
-    opt.textContent = c;
-    select.appendChild(opt);
-  });
-}
-
-render(countries);
-
-// filter on typing
-search.addEventListener("input", () => {
-  const val = search.value.toLowerCase().trim();
-
-  const filtered = countries.filter(c =>
-    c.toLowerCase().startsWith(val)
-  );
-
-  render(filtered.length ? filtered : countries);
-});
-
-// optional: sync selection back into input
-select.addEventListener("change", () => {
-  search.value = select.value;
-});
-</script>
+  <input
+    type="text"
+    id="target"
+    placeholder="Type anything..."
   >
 
   <div id="dateSection">
@@ -155,5 +97,7 @@ function finish() {
 }
 </script>
 
+</body>
+</html>
 </body>
 </html>
